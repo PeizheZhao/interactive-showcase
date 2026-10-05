@@ -3,195 +3,37 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Generative Models Timeline</title>
-<meta name="description" content="Interactive timeline of generative modeling techniques from early energy-based models to diffusion, flow matching, multimodal generation and world models.">
+<title>Interactive Showcase</title>
+<meta name="description" content="A collection of independent interactive visualizations, explainers, demos and research showcases.">
 <style>
-:root{
-  --bg:#0b1020;--panel:#11182b;--panel2:#172138;--text:#eef3ff;--muted:#9db0d1;--line:#2b3b61;--accent:#7dd3fc;
-  --c1:#60a5fa;--c2:#34d399;--c3:#f59e0b;--c4:#f472b6;--c5:#a78bfa;--c6:#fb7185;--c7:#22d3ee;--c8:#facc15;
-}
-*{box-sizing:border-box}
-body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:linear-gradient(180deg,#08101f,#0b1020 28%,#0e1425);color:var(--text)}
-a{color:inherit}
-.shell{max-width:1380px;margin:auto;padding:36px 24px 64px}
-.hero{display:grid;grid-template-columns:1.6fr .8fr;gap:24px;align-items:end;margin-bottom:28px}
-.kicker{font-size:13px;text-transform:uppercase;letter-spacing:.16em;color:var(--accent);font-weight:800}
-h1{font-size:clamp(38px,6vw,76px);line-height:.98;margin:8px 0 14px;letter-spacing:-.04em}
-.sub{max-width:800px;color:var(--muted);font-size:18px;line-height:1.6}
-.frontier{background:linear-gradient(180deg,#15213c,#11182b);border:1px solid #27395e;border-radius:20px;padding:20px}
-.frontier h2{margin:0 0 12px;font-size:18px}
-.tags,.filters{display:flex;flex-wrap:wrap;gap:8px}
-.tag,.filter{border:1px solid #31466e;background:#121b31;color:#cfe2ff;border-radius:999px;padding:8px 11px;font-size:13px}
-.filter{cursor:pointer}
-.filter.active{background:#dff6ff;color:#082032;border-color:#dff6ff;font-weight:700}
-.legend{margin:18px 0 14px;display:flex;gap:18px;flex-wrap:wrap;color:var(--muted);font-size:13px}
-.legend span{display:inline-flex;align-items:center;gap:7px}
-.dot{width:9px;height:9px;border-radius:50%;background:#fff}.dash{width:24px;height:6px;border-radius:5px;background:#526786}.hot{background:#facc15}
-.timeline-wrap{overflow-x:auto;border:1px solid #263659;border-radius:22px;background:rgba(12,19,35,.82);box-shadow:0 18px 50px rgba(0,0,0,.18)}
-.timeline{min-width:1120px;padding:18px 20px 22px}
-.years{display:grid;grid-template-columns:210px repeat(14,1fr);gap:0;color:#86a0ca;font-size:12px;border-bottom:1px solid #233353;padding-bottom:10px}
-.year{text-align:center}
-.row{display:grid;grid-template-columns:210px 1fr;align-items:center;min-height:88px;border-bottom:1px solid rgba(50,70,110,.35)}
-.row:last-child{border-bottom:none}
-.family{padding-right:18px}
-.family strong{display:block;font-size:15px}
-.family small{color:var(--muted);line-height:1.35;display:block;margin-top:4px}
-.track{position:relative;height:62px;background-image:linear-gradient(to right,rgba(77,101,150,.24) 1px,transparent 1px);background-size:calc(100% / 13) 100%}
-.band{position:absolute;top:20px;height:22px;border-radius:999px;opacity:.9}
-.band::after{content:"";position:absolute;right:-10px;top:0;width:20px;height:22px;background:linear-gradient(90deg,currentColor,transparent);filter:blur(6px);opacity:.45}
-.node{position:absolute;top:5px;transform:translateX(-50%);border:0;background:#fff;color:#0b1020;border-radius:999px;width:22px;height:22px;font-size:0;cursor:pointer;box-shadow:0 0 0 4px rgba(255,255,255,.08)}
-.node:hover,.node:focus{outline:2px solid var(--accent);outline-offset:3px}
-.node.hot{background:#facc15}
-.nowline{position:absolute;right:0;top:0;bottom:0;width:2px;background:linear-gradient(#facc15,transparent)}
-.detail{margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.card{background:var(--panel);border:1px solid #26375a;border-radius:18px;padding:20px}
-.card h3{margin:0 0 10px}
-.card p{color:var(--muted);line-height:1.55;margin:0}
-.meta{margin-top:12px;font-size:13px;color:#b8c8e5}
-.status{display:inline-block;padding:5px 8px;border-radius:8px;background:#1b2a48;margin-right:6px}
-.bottom{margin-top:24px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.metric{background:var(--panel);border:1px solid #25385c;border-radius:18px;padding:18px}
-.metric b{font-size:16px}.metric p{font-size:14px;color:var(--muted);line-height:1.5;margin-bottom:0}
-footer{margin-top:28px;color:#7288ad;font-size:12px}
-@media(max-width:800px){.hero,.detail,.bottom{grid-template-columns:1fr}.shell{padding:24px 14px 48px}}
+:root{--bg:#0a0f1d;--panel:#121a2d;--panel2:#18223a;--text:#f4f7ff;--muted:#9fb0cf;--line:#2a3a60;--accent:#7dd3fc}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#07101d,#0a0f1d 30%,#0d1424);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.shell{max-width:1180px;margin:auto;padding:54px 22px 72px}.eyebrow{font-size:13px;letter-spacing:.17em;text-transform:uppercase;color:var(--accent);font-weight:800}
+h1{font-size:clamp(46px,8vw,86px);line-height:.94;letter-spacing:-.05em;margin:10px 0 18px}.lead{max-width:760px;color:var(--muted);font-size:18px;line-height:1.65}
+.bar{display:flex;justify-content:space-between;gap:18px;align-items:end;margin:50px 0 18px}.bar h2{margin:0;font-size:22px}.bar p{margin:0;color:var(--muted);font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}.card{grid-column:span 6;display:block;text-decoration:none;color:inherit;background:linear-gradient(180deg,#141e34,#10182a);border:1px solid #293a61;border-radius:22px;padding:24px;min-height:240px;transition:.18s transform,.18s border-color}
+.card:hover{transform:translateY(-3px);border-color:#4c6b9f}.card .num{color:#7190bd;font-size:13px}.card h3{font-size:28px;line-height:1.1;margin:36px 0 12px}.card p{color:var(--muted);line-height:1.55;margin:0 0 22px}.tags{display:flex;gap:8px;flex-wrap:wrap}.tag{font-size:12px;background:#1b2946;border:1px solid #30476f;border-radius:999px;padding:6px 9px;color:#c9daf8}.arrow{float:right;font-size:28px}
+.empty{grid-column:span 6;border:1px dashed #304264;border-radius:22px;padding:24px;color:#7086aa;display:flex;align-items:center;justify-content:center;min-height:240px;text-align:center}
+footer{margin-top:36px;color:#667b9d;font-size:12px;border-top:1px solid #22314f;padding-top:18px}
+@media(max-width:760px){.card,.empty{grid-column:1/-1}.shell{padding:34px 14px 52px}.bar{align-items:flex-start;flex-direction:column}}
 </style>
 </head>
 <body>
-<div class="shell">
-<section class="hero">
-  <div>
-    <div class="kicker">Generative Modeling Technology Map · 2000–2026</div>
-    <h1>Where Generative Models Came From — and Where They Are Going</h1>
-    <p class="sub">An interactive map of the major technical families in generative AI: energy-based models, autoregressive models, VAEs, GANs, normalizing flows, diffusion, score/SDE methods, DiT, flow matching, multimodal generation and world models.</p>
-  </div>
-  <aside class="frontier">
-    <h2>2026 frontier</h2>
-    <div class="tags">
-      <span class="tag">Flow Matching</span><span class="tag">Rectified Flow</span><span class="tag">DiT</span>
-      <span class="tag">Unified Multimodal</span><span class="tag">Few-step Generation</span><span class="tag">Video / World Models</span>
-    </div>
-  </aside>
+<main class="shell">
+<div class="eyebrow">Peizhe Zhao · Interactive Exhibits</div>
+<h1>Interactive Showcase</h1>
+<p class="lead">A shared home for independent visual explainers, research maps, teaching demos and interactive experiments. Each project has its own URL and can evolve without affecting the others.</p>
+<div class="bar"><h2>Exhibits</h2><p>Each card opens an independent site.</p></div>
+<section class="grid">
+<a class="card" href="./showcases/generative-models-timeline/">
+  <span class="num">01</span><span class="arrow">↗</span>
+  <h3>Evolution of Generative Modeling</h3>
+  <p>An interactive 2000–2026 map of autoregressive models, VAEs, GANs, diffusion, DiT, flow matching, multimodal generation and world models.</p>
+  <div class="tags"><span class="tag">AI</span><span class="tag">Timeline</span><span class="tag">Interactive</span></div>
+</a>
+<div class="empty">Future exhibits will appear here.<br>Each new project can live under <code>/showcases/&lt;slug&gt;/</code>.</div>
 </section>
-
-<div class="filters" id="filters"></div>
-<div class="legend">
-  <span><i class="dot"></i> milestone</span>
-  <span><i class="dot hot"></i> current frontier milestone</span>
-  <span><i class="dash"></i> approximate community activity / performance relevance</span>
-</div>
-
-<div class="timeline-wrap">
-  <div class="timeline">
-    <div class="years"><div></div><div class="year">2000</div><div class="year">2002</div><div class="year">2004</div><div class="year">2006</div><div class="year">2008</div><div class="year">2010</div><div class="year">2012</div><div class="year">2014</div><div class="year">2016</div><div class="year">2018</div><div class="year">2020</div><div class="year">2022</div><div class="year">2024</div><div class="year">2026</div></div>
-    <div id="rows"></div>
-  </div>
-</div>
-
-<section class="detail">
-  <div class="card" id="detailCard">
-    <h3>Select a milestone</h3>
-    <p>Click any dot on the timeline to inspect the idea, why it mattered, and its status in 2026.</p>
-  </div>
-  <div class="card">
-    <h3>How to read this map</h3>
-    <p>The colored bands are qualitative research-activity and practical-relevance periods, not publication counts. A technology can remain useful long after its “peak” period. Many modern systems combine multiple families—for example, a Transformer backbone with latent diffusion or flow matching.</p>
-  </div>
-</section>
-
-<section class="bottom">
-  <div class="metric"><b>Historical transition</b><p>GAN/VAE-era systems gave way to diffusion as the dominant general-purpose image-generation paradigm, while autoregressive Transformers dominated text.</p></div>
-  <div class="metric"><b>Current convergence</b><p>Transformer backbones now sit inside diffusion and flow systems, while image-token autoregressive models are converging with unified multimodal models.</p></div>
-  <div class="metric"><b>Most promising direction</b><p>Flow Matching / Rectified Flow, efficient few-step sampling, native multimodality, and video/world-model generation are among the strongest forward-looking themes.</p></div>
-</section>
-
-<footer>Designed as a conceptual research map. Dates and activity bands are intentionally approximate and should be interpreted as a high-level view of community momentum.</footer>
-</div>
-
-<script>
-const START=2000, END=2026;
-const families=[
- {id:"ebm",name:"Energy-Based Models",desc:"Learn an energy landscape; sampling via MCMC/Langevin.",color:"var(--c6)",start:2000,end:2012,fade:2018,events:[
-   [2002,"Energy-Based Learning","Early deep generative modeling centered on assigning low energy to plausible data and higher energy elsewhere.","Historical foundation"],
-   [2006,"Restricted Boltzmann Machines","RBMs became a practical building block in early deep generative learning.","Historical peak"]
- ]},
- {id:"ar",name:"Autoregressive Models",desc:"Factorize a joint distribution into next-step prediction.",color:"var(--c1)",start:2005,end:2026,events:[
-   [2016,"PixelCNN / PixelRNN","Autoregressive density estimation became competitive for images via pixel-by-pixel likelihood modeling.","Active"],
-   [2018,"Transformer generation","Transformer-based next-token prediction became the dominant scaling path for language generation.","Dominant in text"],
-   [2025,"Unified multimodal AR","Images can be represented as tokens and generated within a shared multimodal autoregressive framework.","Frontier"]
- ]},
- {id:"vae",name:"VAE / VQ-VAE",desc:"Learn a structured latent space; decode samples back to data.",color:"var(--c2)",start:2013,end:2022,fade:2026,events:[
-   [2013,"Variational Autoencoder","VAEs introduced scalable amortized variational inference for deep latent-variable models.","Mature"],
-   [2017,"VQ-VAE","Discrete latent codes made image tokenization practical and connected latent models to autoregressive Transformers.","Still foundational"]
- ]},
- {id:"gan",name:"GANs",desc:"Generator and discriminator train adversarially.",color:"var(--c3)",start:2014,end:2020,fade:2024,events:[
-   [2014,"GAN","Adversarial training created a new path to high-fidelity sample generation.","Historical breakthrough"],
-   [2019,"StyleGAN","Style-based generators pushed controllable, photorealistic face synthesis to a new level.","Mature / specialized"]
- ]},
- {id:"nf",name:"Normalizing Flows",desc:"Invertible transformations with exact likelihood.",color:"var(--c5)",start:2015,end:2020,fade:2024,events:[
-   [2016,"RealNVP","Coupling layers made exact-likelihood flows practical for images.","Mature"],
-   [2018,"Glow","Invertible 1×1 convolutions improved expressivity and image synthesis quality.","Mature"]
- ]},
- {id:"diff",name:"Diffusion / Score / SDE",desc:"Transform noise into data through learned denoising or score fields.",color:"var(--c4)",start:2019,end:2026,events:[
-   [2020,"DDPM","Denoising Diffusion Probabilistic Models made diffusion a major generative paradigm.","Major breakthrough"],
-   [2021,"Score-based SDE","Score modeling and stochastic differential equations unified diffusion-like generative dynamics.","Highly influential"],
-   [2022,"Latent Diffusion","Moving denoising into latent space enabled efficient high-resolution text-to-image systems.","Mainstream"]
- ]},
- {id:"dit",name:"Diffusion Transformers (DiT)",desc:"Use Transformer backbones inside diffusion/continuous generative processes.",color:"var(--c7)",start:2022,end:2026,events:[
-   [2022,"DiT","Transformer backbones replaced U-Nets in a scalable diffusion architecture.","Frontier backbone"],
-   [2024,"Large-scale DiT systems","Scaling laws and multimodal conditioning made DiT-style architectures central to modern image/video generation.","Hot"]
- ]},
- {id:"flow",name:"Flow Matching / Rectified Flow",desc:"Learn a continuous velocity field transporting noise to data.",color:"var(--c8)",start:2022,end:2026,events:[
-   [2022,"Flow Matching","Continuous transport objectives offered a direct alternative to classical diffusion training.","Fast-growing"],
-   [2023,"Rectified Flow","Straighter probability paths and ODE generation highlighted efficiency and simpler transport geometry.","Very hot"],
-   [2026,"Flow-centric generation","Flow-based training and sampling are now a major frontier for image, video and multimodal generation.","Current frontier"]
- ]},
- {id:"multi",name:"Unified Multimodal Generation",desc:"One system jointly understands and generates text, images and other modalities.",color:"#94a3b8",start:2023,end:2026,events:[
-   [2024,"Native multimodal generation","Understanding, editing and generation increasingly move into shared multimodal models.","Frontier"],
-   [2026,"Unified generative agents","Generation is becoming part of general multimodal reasoning and tool-using systems.","Emerging frontier"]
- ]},
- {id:"world",name:"Video / World Models",desc:"Model temporally coherent scenes, actions and future states.",color:"#fb7185",start:2023,end:2026,events:[
-   [2024,"Foundation video generation","Longer, higher-fidelity video generation became a major application frontier.","Hot"],
-   [2026,"World-model direction","Generative models increasingly target interactive environments, simulation and action-conditioned futures.","Current frontier"]
- ]}
-];
-
-const filters=document.getElementById("filters");
-const rows=document.getElementById("rows");
-const detail=document.getElementById("detailCard");
-
-function pct(y){return ((y-START)/(END-START))*100}
-function statusHot(s){return /frontier|hot|fast-growing/i.test(s)}
-
-function render(filter="all"){
- rows.innerHTML="";
- families.forEach(f=>{
-   if(filter!=="all" && f.id!==filter) return;
-   const row=document.createElement("div");row.className="row";
-   const fam=document.createElement("div");fam.className="family";
-   fam.innerHTML="<strong>"+f.name+"</strong><small>"+f.desc+"</small>";
-   const tr=document.createElement("div");tr.className="track";
-   const band=document.createElement("div");band.className="band";
-   band.style.left=pct(f.start)+"%";band.style.width=(pct(f.end)-pct(f.start))+"%";band.style.background=f.color;band.style.color=f.color;
-   tr.appendChild(band);
-   f.events.forEach(e=>{
-     const b=document.createElement("button");b.className="node"+(statusHot(e[3])?" hot":"");b.style.left=pct(e[0])+"%";
-     b.setAttribute("aria-label",e[1]+" ("+e[0]+")");
-     b.addEventListener("click",()=>showDetail(f,e));
-     tr.appendChild(b);
-   });
-   const now=document.createElement("div");now.className="nowline";tr.appendChild(now);
-   row.appendChild(fam);row.appendChild(tr);rows.appendChild(row);
- });
-}
-
-function showDetail(f,e){
- detail.innerHTML="<h3>"+e[1]+" · "+e[0]+"</h3><p>"+e[2]+"</p><div class='meta'><span class='status'>"+f.name+"</span><span class='status'>"+e[3]+"</span></div>";
-}
-
-const all=document.createElement("button");all.className="filter active";all.textContent="All routes";all.addEventListener("click",()=>selectFilter(all,"all"));filters.appendChild(all);
-families.forEach(f=>{const b=document.createElement("button");b.className="filter";b.textContent=f.name;b.addEventListener("click",()=>selectFilter(b,f.id));filters.appendChild(b)});
-function selectFilter(btn,id){document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));btn.classList.add("active");render(id)}
-render();
-</script>
+<footer>Independent static exhibits hosted from one GitHub Pages repository.</footer>
+</main>
 </body>
 </html>
