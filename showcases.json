@@ -1,0 +1,15 @@
+{
+  "site": {
+    "title": "Interactive Showcase",
+    "description": "Independent interactive visualizations, explainers and demos."
+  },
+  "showcases": [
+    {
+      "slug": "generative-models-timeline",
+      "title": "Evolution of Generative Modeling",
+      "description": "Interactive timeline of major generative modeling routes from 2000 to 2026.",
+      "path": "showcases/generative-models-timeline/",
+      "tags": ["AI", "Timeline", "Interactive"]
+    }
+  ]
+}
