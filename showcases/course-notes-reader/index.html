@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Course Space · 课程笔记</title>
+<meta name="description" content="从 Google Drive 实时读取的私人课程笔记阅读器。">
+<meta name="referrer" content="no-referrer">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css">
+<link rel="stylesheet" href="style.css">
+<script defer src="https://cdn.jsdelivr.net/npm/marked@15.0.12/lib/marked.umd.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/dompurify@3.2.7/dist/purify.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js"></script>
+<script defer src="https://accounts.google.com/gsi/client"></script>
+<script defer src="config.js"></script>
+<script type="module" src="app.js"></script>
+</head>
+<body>
+<header class="topbar">
+ <a class="brand" href="./"><span class="brand-symbol">C<span>·</span></span><span>Course Space<small>你的知识，自成体系</small></span></a>
+ <div class="top-actions"><span class="connection" id="connection">尚未连接</span><button id="refresh" title="重新读取网盘最新目录和当前笔记">↻ 刷新</button><button id="theme" aria-label="切换明暗主题">◐</button><button id="settings">连接设置</button></div>
+</header>
+<div class="workspace">
+ <aside class="sidebar" id="sidebar">
+  <div class="side-header"><span class="eyebrow">LIBRARY / 课程空间</span><button class="mobile-close" id="closeSidebar" aria-label="关闭导航">×</button></div>
+  <select id="course" aria-label="选择课程"><option>连接后选择课程</option></select>
+  <label class="search"><span>⌕</span><input id="search" placeholder="搜索文件与章节…" aria-label="搜索文件与章节"></label>
+  <div class="tree" id="tree"><p class="muted side-hint">连接 Google Drive 后，课程目录会在这里自动出现。</p></div>
+  <div class="side-bottom"><button id="local">＋ 打开本地 Markdown 文件夹</button><small>文件只在当前浏览器中读取</small></div>
+ </aside>
+ <main id="main">
+  <div class="reading-bar"><button id="openSidebar" class="mobile-menu" aria-label="打开章节导航">☰</button><div class="breadcrumb" id="breadcrumb">课程空间</div><div class="read-actions"><button id="fontDown" aria-label="缩小字号">A−</button><button id="fontUp" aria-label="放大字号">A＋</button><button id="logout" hidden>断开连接</button></div></div>
+  <div id="status" role="status" aria-live="polite" hidden></div>
+  <div class="reading-grid">
+   <div class="document-wrap">
+    <section id="welcome" class="welcome">
+     <div class="eyebrow">READ. CONNECT. UNDERSTAND.</div>
+     <h1>把笔记，变成<br><em>清晰的知识。</em></h1>
+     <p>章节有序，公式清楚。笔记留在 Google Drive，阅读器随内容更新。</p>
+     <div class="welcome-buttons"><button class="primary" id="connect">连接我的 Google Drive <span>↗</span></button><button id="localWelcome">打开本地笔记</button></div>
+     <div class="feature-grid"><div><span>01</span><h3>按章节阅读</h3><p>课程、章节、小节逐层展开，点击即可读取。</p></div><div><span>02</span><h3>公式与推导</h3><p>LaTeX 数学排版，长公式可横向阅读。</p></div><div><span>03</span><h3>笔记自动更新</h3><p>阅读时获取最新内容，网站代码无需跟着改动。</p></div></div>
+     <div class="setup-note"><strong>首次连接需要一个 Google OAuth Client ID</strong><p>这是 Google 为你自己的阅读器分配的应用编号。连接设置内有完整步骤；不需要把笔记公开。</p><button id="setupHelp">查看连接步骤 →</button></div>
+    </section>
+    <article id="document" class="prose" hidden></article>
+    <div class="doc-footer" id="docFooter" hidden><span id="docMeta"></span><button id="original">查看原文件 ↗</button></div>
+   </div>
+   <aside class="toc" id="toc"><span class="eyebrow">ON THIS PAGE</span><p class="muted">打开笔记后，页内目录会在这里生成。</p></aside>
+  </div>
+ </main>
+</div>
+<dialog id="dialog">
+ <form id="configForm"><div class="dialog-head"><h2>连接课程空间</h2><button type="button" id="closeDialog" aria-label="关闭设置">×</button></div>
+ <p>网站只保存显示偏好和连接配置。笔记与访问令牌不会写入仓库或本地存储。</p>
+ <label>Google OAuth Client ID<input id="clientId" placeholder="…apps.googleusercontent.com" autocomplete="off" spellcheck="false"></label>
+ <label>Google Drive 根文件夹链接或 ID<input id="folderId" required autocomplete="off" spellcheck="false"></label>
+ <details id="instructions"><summary>第一次配置：跟着这 5 步完成</summary><ol>
+ <li>打开 <a href="https://console.cloud.google.com/" target="_blank" rel="noopener noreferrer">Google Cloud Console</a>，创建或选择你自己的项目。</li>
+ <li>启用 <strong>Google Drive API</strong>。在 Google Auth Platform 中配置应用信息、受众；个人试用可保持 Testing，并把自己的 Google 邮箱加入 Test users。</li>
+ <li>创建 <strong>Web application</strong> 类型的 OAuth Client。把下方域名加入 Authorized JavaScript origins：<code id="origin"></code>。填域名，不填网站路径。</li>
+ <li>使用只读权限 <code>https://www.googleapis.com/auth/drive.readonly</code>。该权限允许读取你账号可访问的 Drive 文件，并非仅限所选文件夹；阅读器自身只浏览你指定的目录。个人自用不需要 client secret，也不需要 API key。</li>
+ <li>将 Client ID 粘贴到上方，保存并连接。每次浏览器会话登录授权；令牌过期后点击重新连接。</li>
+ </ol><p>Google 账号登录必须在普通浏览器内进行。若学校账号限制第三方应用，请使用有该资料访问权限的个人账号，或使用本地文件阅读。</p>
+ <p><a href="https://developers.google.com/identity/oauth2/web/guides/use-token-model" target="_blank" rel="noopener noreferrer">Google 官方说明</a> · <a href="README.md" target="_blank" rel="noopener noreferrer">方案与替代方式</a></p></details>
+ <div class="dialog-actions"><button type="submit">保存配置</button><button type="button" class="primary" id="saveConnect">保存并连接 ↗</button></div></form>
+</dialog>
+<input type="file" id="folderUpload" webkitdirectory multiple hidden>
+<noscript>本阅读器需要 JavaScript 来读取 Google Drive 和排版笔记。</noscript>
+</body></html>

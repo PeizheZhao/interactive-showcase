@@ -10,6 +10,13 @@
       "description": "Interactive timeline of major generative modeling routes from 2000 to 2026.",
       "path": "showcases/generative-models-timeline/",
       "tags": ["AI", "Timeline", "Interactive"]
+    },
+    {
+      "slug": "course-notes-reader",
+      "title": "Course Space · 课程笔记",
+      "description": "Private Google Drive Markdown reader with course navigation and LaTeX typesetting.",
+      "path": "showcases/course-notes-reader/",
+      "tags": ["Google Drive", "Markdown", "LaTeX"]
     }
   ]
 }

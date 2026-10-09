@@ -34,5 +34,8 @@ The exhibits are intentionally independent: each can have its own HTML, CSS and 
 
 ## Current exhibit
 
+### Course Space · 课程笔记
+A generic private Google Drive Markdown reader with course/chapter navigation, KaTeX formulas, relative images and links, local-folder fallback, and updates without redeploying. Only reader code is stored in this repository. See [connection setup and alternatives](showcases/course-notes-reader/README.md).
+
 ### Evolution of Generative Modeling
 An interactive 2000–2026 map covering autoregressive models, VAEs, GANs, normalizing flows, diffusion, DiT, Flow Matching, unified multimodal generation and world models.
