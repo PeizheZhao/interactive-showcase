@@ -16,16 +16,16 @@
 </head>
 <body>
 <header class="topbar">
- <a class="brand" href="./"><span class="brand-symbol">C<span>·</span></span><span>Course Space<small>你的知识，自成体系</small></span></a>
- <div class="top-actions"><span class="connection" id="connection">尚未连接</span><button id="refresh" title="重新读取网盘最新目录和当前笔记">↻ 刷新</button><button id="theme" aria-label="切换明暗主题">◐</button><button id="settings">连接设置</button></div>
+ <a class="brand" href="./"><span class="brand-icon" aria-hidden="true">▤</span><span>课程笔记</span></a>
+ <div class="top-actions"><span class="connection" id="connection">尚未连接</span><button id="refresh" title="重新读取网盘最新目录和当前笔记">刷新</button><button id="theme" aria-label="切换明暗主题">◐</button><button id="settings">连接设置</button></div>
 </header>
 <div class="workspace">
  <aside class="sidebar" id="sidebar">
-  <div class="side-header"><span class="eyebrow">LIBRARY / 课程空间</span><button class="mobile-close" id="closeSidebar" aria-label="关闭导航">×</button></div>
+  <div class="side-header"><span class="eyebrow">课程目录</span><button class="mobile-close" id="closeSidebar" aria-label="关闭导航">×</button></div>
   <select id="course" aria-label="选择课程"><option>连接后选择课程</option></select>
   <label class="search"><span>⌕</span><input id="search" placeholder="搜索文件与章节…" aria-label="搜索文件与章节"></label>
   <div class="tree" id="tree"><p class="muted side-hint">连接 Google Drive 后，课程目录会在这里自动出现。</p></div>
-  <div class="side-bottom"><button id="local">＋ 打开本地 Markdown 文件夹</button><small>文件只在当前浏览器中读取</small></div>
+  <div class="side-bottom"><button id="local">打开本地文件夹</button><small>文件只在当前浏览器中读取</small></div>
  </aside>
  <main id="main">
   <div class="reading-bar"><button id="openSidebar" class="mobile-menu" aria-label="打开章节导航">☰</button><div class="breadcrumb" id="breadcrumb">课程空间</div><div class="read-actions"><button id="fontDown" aria-label="缩小字号">A−</button><button id="fontUp" aria-label="放大字号">A＋</button><button id="logout" hidden>断开连接</button></div></div>
@@ -33,17 +33,15 @@
   <div class="reading-grid">
    <div class="document-wrap">
     <section id="welcome" class="welcome">
-     <div class="eyebrow">READ. CONNECT. UNDERSTAND.</div>
-     <h1>把笔记，变成<br><em>清晰的知识。</em></h1>
-     <p>章节有序，公式清楚。笔记留在 Google Drive，阅读器随内容更新。</p>
-     <div class="welcome-buttons"><button class="primary" id="connect">连接我的 Google Drive <span>↗</span></button><button id="localWelcome">打开本地笔记</button></div>
-     <div class="feature-grid"><div><span>01</span><h3>按章节阅读</h3><p>课程、章节、小节逐层展开，点击即可读取。</p></div><div><span>02</span><h3>公式与推导</h3><p>LaTeX 数学排版，长公式可横向阅读。</p></div><div><span>03</span><h3>笔记自动更新</h3><p>阅读时获取最新内容，网站代码无需跟着改动。</p></div></div>
-     <div class="setup-note"><strong>首次连接需要一个 Google OAuth Client ID</strong><p>这是 Google 为你自己的阅读器分配的应用编号。连接设置内有完整步骤；不需要把笔记公开。</p><button id="setupHelp">查看连接步骤 →</button></div>
+     <h1>课程笔记</h1>
+     <p>连接 Google Drive，按课程和章节浏览笔记。</p>
+     <div class="welcome-buttons"><button class="primary" id="connect">连接 Google Drive</button><button id="localWelcome">打开本地文件夹</button></div>
+     <div class="setup-note"><h2>首次使用</h2><p>在连接设置中填写 Google OAuth Client ID。笔记保留在你的网盘，修改后会自动更新。</p><button id="setupHelp">查看配置步骤</button></div>
     </section>
     <article id="document" class="prose" hidden></article>
     <div class="doc-footer" id="docFooter" hidden><span id="docMeta"></span><button id="original">查看原文件 ↗</button></div>
    </div>
-   <aside class="toc" id="toc"><span class="eyebrow">ON THIS PAGE</span><p class="muted">打开笔记后，页内目录会在这里生成。</p></aside>
+   <aside class="toc" id="toc"><span class="eyebrow">本页目录</span><p class="muted">打开笔记后，页内目录会在这里生成。</p></aside>
   </div>
  </main>
 </div>

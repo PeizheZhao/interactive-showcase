@@ -15,7 +15,7 @@ function configured() {
 }
 function settings(help=false){$('clientId').value=config.clientId||'';$('folderId').value=config.rootFolderId||'';$('origin').textContent=location.origin;$('instructions').open=help;$('dialog').showModal();}
 function save(){Object.assign(config,configured());localStorage.setItem('course-space-config',JSON.stringify(config));}
-function disconnect(){view++;generation++;token='';expires=0;source=null;current=null;releaseUrls();$('document').replaceChildren();$('document').hidden=true;$('welcome').hidden=false;$('docFooter').hidden=true;$('logout').hidden=true;$('tree').replaceChildren();$('course').replaceChildren(new Option('连接后选择课程',''));$('toc').innerHTML='<span class="eyebrow">ON THIS PAGE</span><p class="muted">打开笔记后显示页内目录。</p>';connection('已断开');notice('已清除当前页面中的笔记与登录令牌。');}
+function disconnect(){view++;generation++;token='';expires=0;source=null;current=null;releaseUrls();$('document').replaceChildren();$('document').hidden=true;$('welcome').hidden=false;$('docFooter').hidden=true;$('logout').hidden=true;$('tree').replaceChildren();$('course').replaceChildren(new Option('连接后选择课程',''));$('toc').innerHTML='<span class="eyebrow">本页目录</span><p class="muted">打开笔记后显示页内目录。</p>';connection('已断开');notice('已清除当前页面中的笔记与登录令牌。');}
 async function connect() {
  if(!config.clientId){settings(true);return;}
  if(!window.google?.accounts?.oauth2){notice('Google 登录组件尚未载入，请稍后重试；如果被网络阻止，可使用本地文件阅读。',true);return;}
@@ -66,7 +66,8 @@ async function fullSearch(){
  if(seq!==generation)return;$('tree').replaceChildren(...found.map(f=>entry(f,seq)));notice(found.length?'找到 '+found.length+' 个文件。':'没有找到匹配的文件。');
 }
 function sectionToc() {
- $('toc').replaceChildren();const label=document.createElement('span');label.className='eyebrow';label.textContent='ON THIS PAGE';$('toc').append(label);
+ $('toc').replaceChildren();const label=document.createElement('span');label.className='eyebrow';label.textContent='本页目录';$('toc').append(label);
+ const toggle=document.createElement('button');toggle.className='toc-toggle';toggle.textContent='本页目录';toggle.setAttribute('aria-expanded','false');$('toc').classList.add('collapsed');toggle.onclick=()=>{const open=$('toc').classList.toggle('collapsed');toggle.setAttribute('aria-expanded',String(!open));};$('toc').append(toggle);
  let i=0;for(const h of $('document').querySelectorAll('h2,h3')){h.id='section-'+(++i);const a=document.createElement('a');a.href='#'+h.id;a.textContent=h.textContent;a.className='level'+h.tagName.slice(1);a.onclick=e=>{e.preventDefault();h.scrollIntoView({behavior:'smooth'});};$('toc').append(a);}
  if(!i){const p=document.createElement('p');p.className='muted';p.textContent='本文没有分节标题。';$('toc').append(p);}
 }
@@ -123,7 +124,7 @@ async function openFile(file,preserveScroll=false) {
  $('docMeta').textContent='更新于 '+new Date(file.modifiedTime).toLocaleString('zh-CN')+' · '+(source instanceof LocalSource?'本地文件':'从 Google Drive 实时读取');
  $('original').hidden=source instanceof LocalSource;
  $('original').onclick=()=>file.webViewLink&&window.open(file.webViewLink,'_blank','noopener,noreferrer');
- for(const b of $('tree').querySelectorAll('.tree-file'))b.classList.toggle('active',b.dataset.id===file.id);
+ for(const b of $('tree').querySelectorAll('.tree-file')){b.classList.toggle('active',b.dataset.id===file.id);if(b.dataset.id===file.id)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');}
  if(source instanceof DriveSource)history.replaceState(null,'','#'+new URLSearchParams({course:courseId,file:file.id}));
  $('sidebar').classList.remove('open');if(preserveScroll)window.scrollTo(0,y);else window.scrollTo(0,0);
 }
