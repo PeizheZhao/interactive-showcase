@@ -97,7 +97,7 @@ async function decorate(file,seq) {
   };
  }
  for(const img of $('document').querySelectorAll('img')){
-  const src=img.getAttribute('src');img.loading='lazy';
+  const src=img.dataset.courseSrc;img.removeAttribute('data-course-src');img.loading='lazy';if(!src)continue;
   try{let target;if(/^https?:/.test(src)){const u=new URL(src);if(!['drive.google.com','docs.google.com'].includes(u.hostname)){img.removeAttribute('src');img.alt='外部图片：'+src;continue;}target=await linkTarget(src,file);}else target=await linkTarget(src,file);
    if(!target)continue;const url=URL.createObjectURL(await source.blob(target.id));if(seq!==view){URL.revokeObjectURL(url);return;}objectUrls.push(url);img.src=url;
   }catch(e){img.removeAttribute('src');img.alt='图片读取失败：'+e.message;}

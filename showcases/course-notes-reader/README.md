@@ -40,6 +40,6 @@ Client ID 保存在当前浏览器的设置中，不需要修改仓库。每次�
 
 在仓库根目录启动任意静态 HTTP 服务，访问此目录。依赖使用固定版本 CDN：marked 15.0.12、DOMPurify 3.2.7、KaTeX 0.16.22，Google Identity Services 使用官方脚本。联网失败时显示加载错误；字体有系统回退。
 
-首次发布前已用当前三篇 Drive 笔记验证全部 **145 个公式**，并检查混合数学定界符、代码段、表格、非法公式、HTML 清洗、相对路径、Drive 分页和内存缓存。私人笔记测试文件留在仓库之外，没有提交。
+首次发布前已用当前三篇 Drive 笔记验证全部 **145 个公式**，并检查混合数学定界符、代码段、表格、非法公式、HTML 清洗、相对路径、Drive 分页和内存缓存。在真实 Chromium 中检查了全部 145 个公式、分数布局、桌面及手机视口、章节菜单、连接设置和断开连接，控制台没有脚本异常。私人笔记测试文件留在仓库之外，没有提交。Google OAuth 实际登录仍需用户完成自己的 Client ID 配置后验证。
 
 官方参考：[Google OAuth token model](https://developers.google.com/identity/oauth2/web/guides/use-token-model) · [Drive scopes](https://developers.google.com/workspace/drive/api/guides/api-specific-auth) · [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages)

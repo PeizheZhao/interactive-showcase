@@ -44,6 +44,8 @@ export function renderMarkdown(source, {marked,DOMPurify,katex}) {
   const prepared = prepareMath(source); const errors = [];
   const fragment = DOMPurify.sanitize(marked.parse(prepared.text,{gfm:true,breaks:false}),{RETURN_DOM_FRAGMENT:true,ADD_ATTR:['target'],FORBID_TAGS:['iframe','script','style','form','input','object','embed'],FORBID_ATTR:['style']});
   const doc=fragment.ownerDocument;
+  // Resolve images through the configured source before attaching to the live DOM.
+  for(const img of fragment.querySelectorAll('img')){const src=img.getAttribute('src');if(src){img.dataset.courseSrc=src;img.removeAttribute('src');}}
   const walker=doc.createTreeWalker(fragment,4);
   const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
   for (const {key,tex,display} of prepared.math) {
